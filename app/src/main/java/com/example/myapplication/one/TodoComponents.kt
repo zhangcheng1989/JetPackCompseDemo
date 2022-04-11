@@ -13,7 +13,16 @@ import androidx.compose.ui.unit.dp
 import com.example.myapplication.todo.TodoItem
 
 @Composable
-fun TodoComponents(onItemCmplete:(TodoItem) -> Unit) {
+fun TodoItemInput(onItemCmplete:(TodoItem) -> Unit) {
+
+
+    // 这个函数使用remember 给自己添加内存，然后在内存中存储一个由mutableStateOf 创建的 mutableStateOf<String>
+    //它是compose 的内置类型，提供一个可观察的状态持有者
+    //val(text,setText) = remember {
+    //       mutableStateOf("")
+    //    }
+    //对value 的任何更改都将自动重新组合读取此状态的任何可组合函数
+
 
     val(text,setText) = remember {
        mutableStateOf("")
@@ -33,7 +42,11 @@ fun TodoComponents(onItemCmplete:(TodoItem) -> Unit) {
             )
 
             TodoEditButton(
-                onClick = {},
+                onClick =
+                {
+                    onItemCmplete(TodoItem(text))
+                    setText("")
+                },
                 "Add",
                 modifier = Modifier.align(Alignment.CenterVertically),
                 enabled = text.isNotBlank()

@@ -20,7 +20,7 @@ class TodoActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApplicationTheme {
-                TodoComponents({
+                TodoItemInput({
                     Log.i("zc",it.task)
                 })
             }
