@@ -1,6 +1,7 @@
 package com.example.myapplication.one
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -19,7 +20,9 @@ class TodoActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApplicationTheme {
-                TodoActivityScreen()
+                TodoComponents({
+                    Log.i("zc",it.task)
+                })
             }
         }
     }
