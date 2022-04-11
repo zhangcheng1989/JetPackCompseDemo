@@ -1,4 +1,4 @@
-package com.example.myapplication.one
+package com.example.myapplication.two
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutLinearInEasing
@@ -9,16 +9,21 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.example.myapplication.todo.TodoIcon
 import com.example.myapplication.todo.TodoItem
@@ -137,6 +142,14 @@ fun TodoItemInput(onItemCmplete:(TodoItem) -> Unit) {
     //iconrow 是否可见
     val iconsVisible = text.isNotBlank()
 
+
+    val submit = {
+        onItemCmplete(TodoItem(text))
+        setIcon(TodoIcon.Default)
+        setText("")
+    }
+
+
     Column {
         Row(
             Modifier
@@ -148,14 +161,16 @@ fun TodoItemInput(onItemCmplete:(TodoItem) -> Unit) {
                 onTextChange = setText,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(8.dp)
+                    .padding(8.dp),
+                onItemAction = {
+                    submit
+                }
             )
 
             TodoEditButton(
                 onClick =
                 {
-                    onItemCmplete(TodoItem(text))
-                    setText("")
+                    submit
                 },
                 "Add",
                 modifier = Modifier.align(Alignment.CenterVertically),
@@ -171,19 +186,31 @@ fun TodoItemInput(onItemCmplete:(TodoItem) -> Unit) {
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun TodoInputText(
     text:String,
     onTextChange:(String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onItemAction:() -> Unit = {}
 ){
+
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     TextField(
         value = text,
         onValueChange = onTextChange,
         colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.Transparent),
         maxLines = 1,
-        modifier = modifier
-    )
+        modifier = modifier,
+        //配置软键盘
+        keyboardOptions = KeyboardOptions.Default.copy(imeAction =  ImeAction.Done),
+        keyboardActions = KeyboardActions(onDone = {
+            onItemAction()
+            keyboardController?.hide() //点击完成隐藏键盘
+        })
+
+        )
 }
 
 @Composable
