@@ -5,5 +5,8 @@
     <string name="Event">Event</string>
     <string name="Privacy">Privacy</string>
     <string name="Restore">Restore</string>
-
+    <plurals name="fruit_title">
+        <item quantity="one">fruit</item>
+        <item quantity="other">other</item>
+    </plurals>
 </resources>

@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApplicationTheme {
-                TwoTexts()
+                ComposeitionSample2()
             }
 //            MyApplicationTheme {
 //                ScrollingList()
