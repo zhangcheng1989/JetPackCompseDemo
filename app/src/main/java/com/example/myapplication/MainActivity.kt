@@ -41,7 +41,9 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MyApplicationTheme {
-                DisoisableEffectSample(onBackPressedDispatcher)
+//                DisoisableEffectSample(onBackPressedDispatcher)
+
+                ProduceStateSample()
             }
 //            MyApplicationTheme {
 //                ScrollingList()
