@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MyApplicationTheme {
-                ScaffoldSample()
+                DisoisableEffectSample(onBackPressedDispatcher)
             }
 //            MyApplicationTheme {
 //                ScrollingList()

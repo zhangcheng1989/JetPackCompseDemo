@@ -11,6 +11,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import kotlinx.coroutines.launch
 
+
+/**
+ * 由于当LaunchedEffect 是可组合函数，因此只能在其他可组合函数中使用，想要在可组合项目外启动协程，且需要对这个协程存在作用域限制，以便协程在退出组合后自动取消，可以使用rememberCoroutineScope
+ * 此外，如果需要手动控制一个或多个协程的生命周期，请使用rememberCoroutineScope
+ */
 @Composable
 fun ScaffoldSample() {
     val scaffoldState = rememberScaffoldState()
