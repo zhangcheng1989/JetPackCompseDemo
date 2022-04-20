@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.graphics.Point
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,6 +20,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,9 +31,17 @@ data class Message(val author:String,val body:String)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+//        val samllestSize = Paint()
+//        val largestSize = Point()
+//        val realSize = Point()
+//        val display = windowManager.defaultDisplay
+//        display.getCurrentSizeRange(samllestSize!)
+
+
         setContent {
             MyApplicationTheme {
-                LaunchedEffectSample()
+                ScaffoldSample()
             }
 //            MyApplicationTheme {
 //                ScrollingList()
