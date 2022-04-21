@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
 //                DisoisableEffectSample(onBackPressedDispatcher)
 
-                DerivedStateOfSample()
+                SnapShotFlowSample()
             }
 //            MyApplicationTheme {
 //                ScrollingList()
